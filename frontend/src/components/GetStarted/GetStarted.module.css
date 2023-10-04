@@ -1,0 +1,50 @@
+.wrapper {
+    padding: 20px;
+    background-color: #E3F0FF;
+    border-radius: 6px;
+}
+
+.profileSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.textSectionText {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.buttonsWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.joinBtn {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #0B76FF;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.signBtn {
+    margin-top: 7px;
+    display: flex;
+    width: 100%;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0B76FF;
+    border: 1px solid #DEE2E7;
+}

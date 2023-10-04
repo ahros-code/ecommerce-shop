@@ -1,0 +1,12 @@
+.wrapper {
+    padding: 10px;
+    /*margin-bottom: 5px;*/
+}
+
+.active {
+    background-color: red;
+}
+
+.item {
+    color: #505050;
+}

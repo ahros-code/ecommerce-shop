@@ -1,0 +1,28 @@
+.firstCardText {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.wrapper {
+    margin-top: 10px;
+}
+
+.firstCard {
+    border-radius: 6px;
+    padding: 16px;
+    background-color: #F38332;
+    color: #fff;
+}
+
+.secondCard {
+    margin-top: 10px;
+    border-radius: 6px;
+    padding: 16px;
+    background-color: #55BDC3;
+    color: #fff;
+}
+
+.secondCardText {
+    font-weight: 400;
+    font-size: 16px;
+}

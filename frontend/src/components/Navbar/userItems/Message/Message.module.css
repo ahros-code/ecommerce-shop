@@ -1,0 +1,16 @@
+.card {
+    width: 52px;
+    height: 40px;
+    text-align: center;
+}
+
+.text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #8B96A5
+}
+
+.icon > img {
+    width: 20px;
+    height: 20px;
+}
