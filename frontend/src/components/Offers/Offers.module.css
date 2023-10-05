@@ -1,0 +1,39 @@
+.sections {
+    display: flex;
+}
+
+.wrapper {
+    border: 1px solid #DEE2E7;
+    margin-bottom: 40px;
+    max-height: 240px;
+    background-color: #fff;
+}
+
+.rightSection {
+    display: flex;
+}
+
+.leftSection {
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 281px;
+    background-color: #fff;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.leftSectionText {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #606060;
+    width: 122px;
+    height: 38px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+}

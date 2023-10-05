@@ -1,5 +1,7 @@
 import {BrandModel, CategoryModel, ImageModel, ProductModel, ShopModel} from "../models/index";
 import {Request, Response} from "express";
+import {Op} from "sequelize";
+import {newSequelize} from "../config/db/db_connect";
 
 async function findProducts(req: Request, res: Response) {
   try {
@@ -118,4 +120,27 @@ async function getOneProduct(req, res) {
   }
 }
 
-export default {findProducts, getAllShopProducts, getAllProducts, getOneProduct}
+async function getRecommendedProducts(req, res) {
+  try {
+    const { pageNumber, pageSize } = req.query;
+    const offset = pageNumber ? (Number(pageNumber) - 1) * (pageSize ? Number(pageSize) : 10) : 0;
+    const limit = pageSize ? Number(pageSize) : 10;
+
+    const topSoldProducts = await ProductModel.findAll({
+      order: [['sold', 'DESC']],
+      limit: 10
+    });
+
+    res.send(topSoldProducts)
+  } catch (err) {
+    return res.status(500).send({
+      success: false,
+      status: 500,
+      data: [],
+      message: err.message,
+    });
+  }
+}
+
+
+export default {findProducts, getAllShopProducts, getAllProducts, getOneProduct, getRecommendedProducts}

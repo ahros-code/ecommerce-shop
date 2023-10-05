@@ -18,7 +18,7 @@ async function getProfile(req, res) {
     return res.send({
       success: true,
       status: 200,
-      data: [{user}],
+      data: user,
       message: ""
     })
   } catch (err){

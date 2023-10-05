@@ -1,0 +1,79 @@
+.wrapper {
+    background-color: #fff;
+    width: 100%;
+    height: 420px;
+    border-radius: 6px;
+    background-image: url("../../assets/images/inquiry.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+}
+.sections {
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftSection {
+    max-width: 440px;
+}
+
+.leftSectionTitle {
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 13px;
+}
+
+.leftSectionText {
+    font-size: 16px;
+    color: #fff;
+    line-height: 24px;
+}
+
+.rightSection {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+}
+
+.title {
+    margin-bottom: 18px;
+}
+
+.inpClassic {
+    margin-bottom: 20px;
+    width: 440px;
+    height: 40px;
+    padding-left: 7px;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+}
+
+.inpClassic::-webkit-input-placeholder {
+    font-family: 'Inter', sans-serif;
+}
+
+.inpArea {
+    padding-top: 10px;
+    width: 440px;
+    height: 73px;
+    margin-bottom: 25px;
+    padding-left: 7px;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+}
+
+.btn {
+    width: 120px;
+    height: 35px;
+    border: none;
+    border-radius: 6px;
+    background-color: #127FFF;
+    font-size: 16px;
+    color: #ffffff;
+}

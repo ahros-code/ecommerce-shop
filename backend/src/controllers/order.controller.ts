@@ -40,6 +40,8 @@ async function addOrder(req:Request, res:Response){
     const user = await UserModel.findOne({where: {email: userCreds.email, password: userCreds.password}}) as any;
     const cartItems = await CartModel.findAll({ where: { UserModelId: user.id } }) as any;
     for (const cartItem of cartItems) {
+      cartItem.sold + 1;
+      await cartItem.save();
       await OrderModel.create({
         UserModelId: cartItem.UserModelId,
         ProductModelId: cartItem.ProductModelId

@@ -1,4 +1,4 @@
-import {DiscountModel, ImageModel, UserModel} from "../models";
+import {BrandModel, CategoryModel, DiscountModel, ImageModel, ProductModel, ShopModel, UserModel} from "../models";
 import {Request, Response} from "express";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
@@ -9,6 +9,28 @@ async function getDiscounts(req:Request, res:Response) {
     return res.status(200).send({
       success: true,
       data: discounts,
+      status: 200,
+      message: ""
+    });
+  } catch (err){
+    return res.status(500).send({
+      success: false,
+      status: 500,
+      data: [],
+      message: err.message
+    })
+  }
+}
+
+async function getAllProductsInDiscount(req: Request, res:Response) {
+  try{
+    const {pageNumber, pageSize} = req.query as any;
+    const offset = pageNumber ? (pageNumber - 1) * (pageSize ? pageSize : 10) : 0;
+    const limit = pageSize ? pageSize : 10;
+    const offers = await ProductModel.findAll({offset, limit, where: {discount: true}, include: [{model: CategoryModel}, {model: BrandModel}, {model: ShopModel},{model: ImageModel}]})
+    return res.status(200).send({
+      success: true,
+      data: offers,
       status: 200,
       message: ""
     });
@@ -72,5 +94,6 @@ async function addDiscounts(req:Request, res:Response){
 
 export default {
   getDiscounts,
-  addDiscounts
+  addDiscounts,
+  getAllProductsInDiscount
 }
