@@ -5,24 +5,62 @@ import {newSequelize} from "../config/db/db_connect";
 
 async function findProducts(req: Request, res: Response) {
   try {
-    const {pageNumber, pageSize, q} = req.query as any;
+    const { pageNumber, pageSize, q } = req.query as any;
     const offset = pageNumber ? (pageNumber - 1) * (pageSize ? pageSize : 10) : 0;
     const limit = pageSize ? pageSize : 10;
 
-    const products = await ProductModel.findAll({
-      offset,
-      limit,
-      include: [{model: CategoryModel}, {model: BrandModel}],
-    }) as any;
+    let products;
+    let totalCount;
 
-    let foundProducts = products.filter((p: any) =>
-        p.name.toLowerCase().includes(q.toLowerCase())
-    );
+    if (q) {
+      [products, totalCount] = await Promise.all([
+        ProductModel.findAll({
+          offset,
+          limit,
+          include: [
+            { model: CategoryModel },
+            { model: BrandModel },
+            { model: ImageModel },
+            { model: ShopModel },
+          ],
+          where: {
+            name: {
+              [Op.iLike]: `%${q}%`, // Case-insensitive search
+            },
+          },
+        }),
+        ProductModel.count({
+          where: {
+            name: {
+              [Op.iLike]: `%${q}%`,
+            },
+          },
+        }),
+      ]);
+    } else {
+      [products, totalCount] = await Promise.all([
+        ProductModel.findAll({
+          offset,
+          limit,
+          include: [
+            { model: CategoryModel },
+            { model: BrandModel },
+            { model: ImageModel },
+            { model: ShopModel },
+          ],
+        }),
+        ProductModel.count(),
+      ]);
+    }
+
+    const totalPages = Math.ceil(totalCount / limit);
 
     return res.status(200).send({
       success: true,
       status: 200,
-      data: {products: foundProducts},
+      data: products,
+      totalCount: totalCount,
+      totalPages: totalPages,
       message: "",
     });
   } catch (err) {
@@ -128,10 +166,15 @@ async function getRecommendedProducts(req, res) {
 
     const topSoldProducts = await ProductModel.findAll({
       order: [['sold', 'DESC']],
-      limit: 10
+      offset, limit, include: ImageModel
     });
 
-    res.send(topSoldProducts)
+    return res.send({
+      success: true,
+      status: 200,
+      data: topSoldProducts,
+      message: ""
+    })
   } catch (err) {
     return res.status(500).send({
       success: false,

@@ -3,6 +3,8 @@ import CategoryProduct from "../../components/CategoryProduct/CategoryProduct.js
 import Offers from "../../components/Offers/Offers.jsx";
 import Inquiry from "../../components/Inquiry/Inquiry.jsx";
 import Recommended from "../../components/Recommended/Recommended.jsx";
+import Services from "../../components/Services/Services.jsx";
+import Suppliers from "../../components/Suppliers/Suppliers.jsx";
 
 const Home = () => {
   // tokenlarni qosh
@@ -13,6 +15,8 @@ const Home = () => {
         <CategoryProduct/>
         <Inquiry />
         <Recommended />
+        <Services />
+        <Suppliers />
       </>
   )
 }

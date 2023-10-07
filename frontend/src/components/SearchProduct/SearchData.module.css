@@ -1,0 +1,91 @@
+.wrapper {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #DEE2E7;
+    border-radius: 6px;
+    width: 990px;
+    max-height: 230px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-right: 20px;
+}
+
+.main {
+    display: flex;
+}
+
+.image {
+    margin-right: 24px;
+    width: 210px;
+    height: 210px;
+    padding-top: 13px;
+    padding-left: 13px;
+}
+
+.mainSection {
+    padding-top: 23px;
+    padding-bottom: 31px;
+    padding-right: 20px;
+}
+
+.text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1C1C1C;
+    margin-bottom: 16px;
+}
+
+.prices {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.discountPrice {
+    text-decoration: line-through;
+    color: #A9ACB0;
+    font-size: 16px;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 20px;
+    color: #1C1C1C;
+}
+
+.sold {
+    color: #8B96A5;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.description {
+    max-width: 600px;
+    font-size: 16px;
+    color: #606060;
+    line-height: 24px;
+    margin-bottom: 8px;
+}
+
+.details{
+    font-size: 16px;
+    font-weight: 500;
+    color: #0D6EFD
+}
+
+.buttonSection {
+    margin-top: 20px;
+}
+
+.likeButton {
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}

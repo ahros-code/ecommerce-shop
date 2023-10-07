@@ -12,6 +12,8 @@ import imgRouter from "./routers/img.router";
 import orderRouter from "./routers/order.router";
 import discountsRouter from "./routers/discounts.router";
 import cors from "cors"
+import suppliersController from "./controllers/suppliers.controller";
+import suppliersRouter from "./routers/suppliers.router";
 
 async function bootstrap(){
   try{
@@ -32,6 +34,7 @@ async function bootstrap(){
     app.use("/img", imgRouter);
     app.use("/api/order", orderRouter);
     app.use("/api/discount", discountsRouter)
+    app.use("/api/suppliers", suppliersRouter)
   } catch (err){
     console.log(err.message)
   }

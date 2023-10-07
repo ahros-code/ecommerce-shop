@@ -1,0 +1,33 @@
+.title {
+    margin-top: 30px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding-bottom: 46px;
+}
+
+.classsicCard {
+    margin-bottom: 15px;
+}
+
+.sections {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.rightSectionText {
+    font-weight: 400;
+    color: #1C1C1C;
+    font-size: 16px;
+}
+
+.desc {
+    font-size: 13px;
+    color: #8B96A5;
+}

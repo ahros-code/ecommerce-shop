@@ -21,6 +21,9 @@ ProductModel.init({
   discountPrice: {
     type: DataTypes.INTEGER
   },
+  description :{
+    type: DataTypes.TEXT
+  },
   sold: {
     type: DataTypes.INTEGER
   },
@@ -32,7 +35,6 @@ ProductModel.init({
   },
   model: {
     type: DataTypes.STRING,
-    
   },
   design: {
     type: DataTypes.STRING

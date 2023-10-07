@@ -1,0 +1,24 @@
+.wrapper {
+    width: 220px;
+    height: 310px;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+    margin-bottom: 20px;
+}
+
+.textWrapper {
+    padding: 14px 16px 9px;
+}
+
+.price {
+    margin-bottom: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #1C1C1C;
+}
+
+.name {
+    font-weight: 400;
+    font-size: 16px;
+    color: #8B96A5;
+}
