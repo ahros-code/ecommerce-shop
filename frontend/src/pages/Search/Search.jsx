@@ -46,7 +46,9 @@ const Search = () => {
   return (
       <div className={css.wrapper}>
         <div className={css.sidebar}>
-          <Sidebar />
+          {data?.data?.map((data, index) => (
+            <Sidebar key={index} category={data.CategoryModel} brand={data.BrandModel} />
+          ))}
         </div>
         <div className={css.products}>
           {data?.data?.map((data, index) => (

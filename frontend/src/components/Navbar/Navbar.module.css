@@ -19,7 +19,7 @@
     align-items: center;
 }
 
-.search > input  {
+.search > form > input  {
     width: 565px;
     max-width: 100%;
     height: 40px;
@@ -31,7 +31,7 @@
     padding-left: 10px;
 }
 
-.search > button {
+.search > form > button {
     height: 40px;
     width: 100px;
     border-radius: 0 6px 6px 0;
