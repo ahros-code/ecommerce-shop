@@ -33,6 +33,19 @@
     margin-bottom: 9px;
 }
 
+.price {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.discountPrice {
+    font-size: 18px;
+    color: #1C1C1C;
+}
+
 .inline {
     display: flex;
     margin-bottom: 27px;
@@ -53,12 +66,11 @@
     width: 430px;
 }
 
-.price > h5 {
-    font-size: 18px;
-    color: #1C1C1C;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid #DEE2E7;
+.priceWithNotDiscount {
+    font-weight: 400;
+    font-size: 16px;
+    color: #787A80;
+    text-decoration: line-through;
 }
 
 .info {

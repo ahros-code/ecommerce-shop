@@ -20,7 +20,7 @@ const Sections = props => {
           <div className={css.productsSection}>
             {products?.map((product, index) => (
                 <div key={index} className={css.a}>
-                  <ProductCard key={index} name={product.name} image={product.ImageModel.link} price={product.price}
+                  <ProductCard key={index} name={product.name} image={product.ImageModel.link} discountPrice={product.discountPrice}
                                id={product.id}/>
                 </div>
             ))}

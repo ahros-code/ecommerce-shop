@@ -49,8 +49,8 @@ const SearchData = (props) => {
           <div className={css.mainSection}>
             <h4 className={css.text}>{name}</h4>
             <div className={css.prices}>
-              <p className={css.price}>${price}</p>
-              <p className={css.discountPrice}>${discountPrice}</p>
+              <p className={css.price}>${discountPrice}</p>
+              <p className={css.discountPrice}>${price}</p>
             </div>
             <div className={css.ratingSection}>
               <Rating

@@ -9,7 +9,7 @@ const Recommended = () => {
         <h3 className={css.title}>Recommended items</h3>
         <div className={css.items}>
           {products?.data?.map((product, index) => (
-              <RecommendCard key={index} id={product.id} name={product.name} price={product.price} image={product.ImageModel.link}/>
+              <RecommendCard key={index} id={product.id} name={product.name} discountPrice={product.discountPrice} image={product.ImageModel.link}/>
           ))}
         </div>
       </div>

@@ -39,7 +39,8 @@ const SingleProduct = () => {
             </div>
           </div>
           <div className={css.price}>
-            <h5>${data?.data?.price}</h5>
+            <h5 className={css.discountPrice}>${data?.data?.discountPrice}</h5>
+            <h5 className={css.priceWithNotDiscount}>${data?.data?.price}</h5>
           </div>
           <div className={css.priceInfoSection}>
             <div className={css.info}>
