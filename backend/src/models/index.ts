@@ -82,33 +82,11 @@ import OrderRouter from "../routers/order.router";
     }
   });
 
-  UserModel.hasMany(ReviewModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
-  ReviewModel.belongsTo(UserModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
+  ReviewModel.belongsTo(UserModel);
 
-  ReviewModel.belongsTo(ProductModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
+  ProductModel.belongsTo(ReviewModel)
 
-  ShopModel.hasMany(ReviewModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
-  ReviewModel.belongsTo(ShopModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
+  ShopModel.hasMany(ReviewModel);
 
   ShopModel.belongsTo(ImageModel, {
     foreignKey: {

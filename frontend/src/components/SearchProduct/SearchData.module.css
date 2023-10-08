@@ -89,3 +89,8 @@
     width: 40px;
     height: 40px;
 }
+
+.ratingSection {
+    display: flex;
+    gap: 20px;
+}

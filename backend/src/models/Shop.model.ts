@@ -16,6 +16,9 @@ ShopModel.init({
   description: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  country: {
+    type: DataTypes.STRING
   }
 }, {
   sequelize: newSequelize, timestamps: false, tableName:"shops"

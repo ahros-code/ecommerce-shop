@@ -1,0 +1,171 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 20px 22px;
+}
+
+.inStockText {
+    color: #00B517;
+    font-size: 16px;
+}
+
+.ticked {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.imageSection {
+    width: 380px;
+    height: 380px;
+    border: 1px solid #DEE2E7;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: #1C1C1C;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+
+.inline {
+    display: flex;
+    margin-bottom: 27px;
+    justify-content: space-between;
+}
+
+.sold {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.soldNumber {
+    width: 100px;
+}
+
+.infoSection {
+    width: 430px;
+}
+
+.price > h5 {
+    font-size: 18px;
+    color: #1C1C1C;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.info {
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.itemKey {
+    width: 66px;
+    font-size: 16px;
+    color: #8B96A5;
+}
+
+.itemValue {
+    color: #505050;
+    margin-left: 97px;
+}
+
+.materialInfoSection {
+    margin-bottom: 16px;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.priceInfoSection {
+    margin-bottom: 16px;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+/* Shop information section */
+
+.shopInfoSection {
+    width: 280px;
+    height: 325px;
+    border: 1px solid #DEE2E7;
+    border-radius: 6px;
+    padding: 19px 17px 21px;
+    background-color: #fff;
+}
+
+.image {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+}
+
+.nameAndImage {
+    display: flex;
+    gap: 11px;
+    padding-bottom: 20px;
+    margin-bottom: 13px;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.items {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.countryImage {
+    width: 20px;
+    height: 20px;
+    margin-right: 18px;
+}
+
+.countryName {
+    color: #8B96A5;
+}
+
+.btns {
+    margin-top: 28px;
+}
+
+.firstBtn {
+    border-radius: 6px;
+    border: none;
+    display: flex;
+    width: 100%;
+    background-color: #127FFF;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 8px;
+}
+
+.firstBtn > p {
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+}
+
+.secondBtn {
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 8px;
+}
+
+.secondBtn > p {
+    font-weight: 500;
+    font-size: 16px;
+    color: #127FFF;
+}

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import css from './SearchData.module.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import heartIcon from "../../assets/images/like.svg"
 import heartFillIcon from "../../assets/images/heartFilled.png"
+import {Rating} from "@mui/material";
 
 const SearchData = (props) => {
-  const { name, image, price, discountPrice, description, sold, id } = props;
+  const {name, image, price, discountPrice, description, sold, id, rating} = props;
+  const [value, setValue] = React.useState(0);
 
   // Initialize state for the like status
   const [isLiked, setIsLiked] = useState(() => {
@@ -30,7 +32,7 @@ const SearchData = (props) => {
       localStorage.setItem('likedItems', JSON.stringify(updatedLikedItems));
     } else {
       // Add the item to likedItems
-      const newItem = { id, name, image, price, discountPrice, description, sold };
+      const newItem = {id, name, image, price, discountPrice, description, sold};
       const updatedLikedItems = [...likedItems, newItem];
       localStorage.setItem('likedItems', JSON.stringify(updatedLikedItems));
     }
@@ -42,7 +44,7 @@ const SearchData = (props) => {
       <div className={css.wrapper}>
         <div className={css.main}>
           <div className={css.image}>
-            <img src={`${import.meta.env.VITE_BACK_URL}${image}`} alt={`${name}'s image`} />
+            <img src={`${import.meta.env.VITE_BACK_URL}${image}`} alt={`${name}'s image`}/>
           </div>
           <div className={css.mainSection}>
             <h4 className={css.text}>{name}</h4>
@@ -50,7 +52,13 @@ const SearchData = (props) => {
               <p className={css.price}>${price}</p>
               <p className={css.discountPrice}>${discountPrice}</p>
             </div>
-            <div className={css.sold}>{sold} orders</div>
+            <div className={css.ratingSection}>
+              <Rating
+                  value={rating}
+                  readOnly
+              />
+              <div className={css.sold}>{sold} orders</div>
+            </div>
             <div className={css.description}>{description.slice(0, 150)}</div>
             <Link to={`/products/${id}`}>
               <p className={css.details}>View details</p>
@@ -59,7 +67,8 @@ const SearchData = (props) => {
         </div>
         <div className={css.buttonSection}>
           <button className={css.likeButton} onClick={handleLike}>
-            <img src={isLiked ? heartFillIcon : heartIcon} alt="Heart icon" className={isLiked ? css.likedIcon : css.unlikedIcon} />
+            <img src={isLiked ? heartFillIcon : heartIcon} alt="Heart icon"
+                 className={isLiked ? css.likedIcon : css.unlikedIcon}/>
           </button>
         </div>
       </div>

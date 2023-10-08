@@ -30,6 +30,9 @@ ProductModel.init({
   warranty: {
     type: DataTypes.INTEGER
   },
+  rating: {
+    type: DataTypes.ENUM('1', '2', '3', '4', '5')
+  },
   size: {
     type: DataTypes.INTEGER
   },

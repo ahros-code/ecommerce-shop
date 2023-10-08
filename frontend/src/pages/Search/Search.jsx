@@ -42,13 +42,10 @@ const Search = () => {
   const handlePageChange = (event, page) => {
     navigate(`?q=${queryValue}&pageNumber=${page}`);
   };
-
   return (
       <div className={css.wrapper}>
         <div className={css.sidebar}>
-          {data?.data?.map((data, index) => (
-            <Sidebar key={index} category={data.CategoryModel} brand={data.BrandModel} />
-          ))}
+            <Sidebar categories={data?.data} brand={data?.data} />
         </div>
         <div className={css.products}>
           {data?.data?.map((data, index) => (
@@ -61,6 +58,7 @@ const Search = () => {
                   description={data.description}
                   sold={data.sold}
                   id={data.id}
+                  rating={data.rating}
               />
           ))}
           <div className={css.pagination}>

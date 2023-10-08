@@ -1,4 +1,4 @@
-import {BrandModel, CategoryModel, ImageModel, ProductModel, ShopModel} from "../models/index";
+import {BrandModel, CategoryModel, ImageModel, ProductModel, ReviewModel, ShopModel} from "../models/index";
 import {Request, Response} from "express";
 import {Op} from "sequelize";
 import {newSequelize} from "../config/db/db_connect";
@@ -132,7 +132,7 @@ async function getOneProduct(req, res) {
     const {productId} = req.params;
     const product = await ProductModel.findOne({
       where: {id: productId},
-      include: [{model: BrandModel}, {model: CategoryModel}, {model: ShopModel}, {model: ImageModel}]
+      include: [{model: BrandModel}, {model: CategoryModel}, {model: ShopModel}, {model: ImageModel}, {model: ReviewModel}]
     })
     if (!product) {
       return res.status(404).send({
