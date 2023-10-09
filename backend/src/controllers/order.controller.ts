@@ -1,4 +1,4 @@
-import {CartModel, OrderModel, ProductModel, UserModel} from "../models";
+import {CartModel, ImageModel, OrderModel, ProductModel, UserModel} from "../models";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
 import {Request, Response} from "express";
@@ -18,13 +18,21 @@ async function getUserOrders(req, res) {
       });
     }
 
-    const orders = await OrderModel.findAll({ where: { UserModelId: user.id }, include: ProductModel }) as any;
+    const orders = await OrderModel.findAll({
+      where: { UserModelId: user.id },
+      include: [
+        {
+          model: ProductModel,
+          include: [ImageModel] // Include ImageModel in ProductModel
+        }
+      ]
+    }) as any;
 
     // Group orders by orderNumber
     const groupedOrders = {};
     for (const order of orders) {
       const product = order.ProductModel; // Access the ProductModel object
-      const price = product.price; // Access the price property from the ProductModel object
+      const price = product.discountPrice; // Access the price property from the ProductModel object
       let date = new Date() as any;
       date = String(date)
       date = date.split(" ")

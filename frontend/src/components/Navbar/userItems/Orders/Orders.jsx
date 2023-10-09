@@ -9,7 +9,7 @@ const Orders = () => {
         </div>
         <div className={css.textWrapper}>
           <p className={css.text}>
-            Orders
+            Liked
           </p>
         </div>
       </div>

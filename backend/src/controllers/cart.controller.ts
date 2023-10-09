@@ -1,13 +1,13 @@
 import {Request, Response} from "express";
-import {CartModel} from "../models/index";
+import {CartModel, ImageModel, OrderModel, SellerModel, ShopModel} from "../models/index";
 import {ProductModel, UserModel} from "../models";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
 
 async function getUserCart(req:Request, res: Response) {
   try{
-    const {token} = req.headers;
-    const userCreds = jwt.sign(token, JWT_SECRET) as any;
+    const {token} = req.headers as any;
+    const userCreds = jwt.verify(token, JWT_SECRET) as any;
     const user = await UserModel.findOne({where: {email: userCreds.email, password: userCreds.password}}) as any;
     if(!(user) || !token || !userCreds){
       return res.status(400).send({
@@ -17,11 +17,19 @@ async function getUserCart(req:Request, res: Response) {
         message: "Token is invalid"
       })
     }
-    const cart = await CartModel.findAll({where: {UserModelId: user.id}, include: ProductModel});
+    const cart = await CartModel.findAll({
+      where: { UserModelId: user.id },
+      include: [
+        {
+          model: ProductModel,
+          include: [ImageModel, ShopModel]
+        }
+      ]
+    }) as any;
     return res.status(200).send({
       success: true,
       status: 200,
-      data: [{cart}],
+      data: cart,
       message: ""
     })
   } catch (err){

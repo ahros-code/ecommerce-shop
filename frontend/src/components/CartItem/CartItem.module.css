@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.image {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #DEE2E7;
+    border-radius: 6px;
+    background-color: #F7FAFC;
+}
+
+.productTitle {
+    color: #1C1C1C;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.shopTitle {
+    color: #606060;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.information {
+    margin-left: 10px;
+}

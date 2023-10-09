@@ -5,8 +5,27 @@
 .sidebar > h3 {
     font-weight: 400;
     font-size: 27px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #DEE2E7;
+    margin-bottom: 20px;
 }
 
 .sibebarList {
     margin-right: 270px;
+}
+
+.sideBarItem {
+    width: 100px;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.notActiveLink {
+    color: #606060;
+    font-weight: 400;
+}
+
+.activeLink {
+    color: #1C1C1C;
+    font-weight: 500;
 }

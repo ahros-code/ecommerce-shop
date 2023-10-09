@@ -1,3 +1,45 @@
 .wrapper {
     padding-bottom: 20px;
 }
+
+.card > img {
+    width: 80px;
+    height: 80px;
+}
+
+.card {
+    border-bottom: 1px solid #DEE2E7;
+}
+
+.cardWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.sec {
+    display: flex;
+    flex-direction: column;
+}
+
+.secWrapper {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.name {
+    width: 50px;
+    margin-right: 200px;
+    margin-left: 30px;
+    font-size: 16px;
+    color: #606060;
+}
+
+.parent {
+    display: flex;
+    align-items: center;
+}
+
+.review {
+    margin-left: auto;
+}

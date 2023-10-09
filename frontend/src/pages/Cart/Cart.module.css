@@ -1,0 +1,11 @@
+.mainSection {
+    width: 880px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+    padding: 20px;
+}
+
+.myCartTitle {
+    margin-bottom: 23px;
+}

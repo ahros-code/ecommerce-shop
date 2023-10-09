@@ -36,7 +36,7 @@ const NavbarComponent = () => {
         </div>
         <ul className={css.userItems}>
           <li className={css.item}>
-            <Link to={"/profile"}>
+            <Link to={"/profile/orders"}>
               <Profile/>
             </Link>
           </li>
@@ -46,12 +46,12 @@ const NavbarComponent = () => {
             </Link>
           </li>
           <li className={css.item}>
-            <Link to={"https://kun.uz"}>
+            <Link to={"/liked"}>
               <Orders/>
             </Link>
           </li>
           <li className={css.item}>
-            <Link to={"https://kun.uz"}>
+            <Link to={"/cart"}>
               <MyCart/>
             </Link>
           </li>

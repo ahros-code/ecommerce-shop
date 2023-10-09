@@ -8,14 +8,6 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.getItem('token') ? localStorage.getItem('token') : ''
   );
 
-  const NavToLogin = useNavigate();
-
-  useEffect(() => {
-    if (!token) {
-      NavToLogin('/');
-    }
-  }, []);
-
   return (
       <AuthContext.Provider
           value={{
