@@ -6,7 +6,7 @@ const RecommendCard = (props) => {
   return (
       <div className={css.wrapper}>
         <Link to={`/products/${id}`}>
-          <img src={`${import.meta.env.VITE_BACK_URL}${image}`} alt={`${name}'s image`}/>
+          <img src={`${import.meta.env.VITE_BACK_URL}${image}`} alt={`${name}'s image`} className={css.image}/>
           <div className={css.textWrapper}>
             <h4 className={css.price}>${discountPrice}</h4>
             <p className={css.name}>{name}</p>

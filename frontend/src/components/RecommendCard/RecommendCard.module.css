@@ -4,6 +4,9 @@
     border-radius: 6px;
     border: 1px solid #DEE2E7;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
 }
 
 .textWrapper {
@@ -21,4 +24,9 @@
     font-weight: 400;
     font-size: 16px;
     color: #8B96A5;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
 }
