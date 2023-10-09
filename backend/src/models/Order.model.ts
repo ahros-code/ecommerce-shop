@@ -8,5 +8,8 @@ OrderModel.init({
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
+  },
+  orderNumber: {
+    type: DataTypes.INTEGER
   }
 },{sequelize: newSequelize, timestamps: false, tableName: "orders"})

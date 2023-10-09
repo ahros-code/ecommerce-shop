@@ -1,0 +1,12 @@
+.sections {
+    display: flex;
+}
+
+.sidebar > h3 {
+    font-weight: 400;
+    font-size: 27px;
+}
+
+.sibebarList {
+    margin-right: 270px;
+}
