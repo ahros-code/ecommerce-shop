@@ -3,6 +3,7 @@
     padding-bottom: 15px;
     margin-bottom: 15px;
     border-bottom: 1px solid #DEE2E7;
+    justify-content: space-between;
 }
 
 .image {
@@ -27,4 +28,32 @@
 
 .information {
     margin-left: 10px;
+}
+
+.top {
+    display: flex;
+}
+
+.bottom {
+    margin-left: 91px;
+    display: flex;
+    gap: 9px;
+}
+
+.removeBtn {
+    padding: 7px 10px;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #FA3434;
+    font-weight: 500;
+    border: 1.5px solid #DEE2E7;
+}
+
+.saveBtn {
+    padding: 7px 10px;
+    border-radius: 6px;
+    background-color: #fff;
+    font-weight: 500;
+    color: #0D6EFD;
+    border: 1.5px solid #DEE2E7;
 }
