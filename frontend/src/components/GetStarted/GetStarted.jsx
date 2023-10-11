@@ -14,8 +14,8 @@ const GetStarted = () => {
           </div>
         </div>
         <div className={css.buttonsWrapper}>
-          <Link className={css.joinBtn}>Join now</Link>
-          <Link className={css.signBtn}>Log in</Link>
+          <Link to={"/register"} className={css.joinBtn}>Join now</Link>
+          <Link to={"/login"} className={css.signBtn}>Log in</Link>
         </div>
       </div>
   )

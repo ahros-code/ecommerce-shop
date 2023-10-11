@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import css from './SearchData.module.css';
 import { Link } from 'react-router-dom';
 import heartIcon from "../../assets/images/like.svg";
 import heartFillIcon from "../../assets/images/heartFilled.png";
 import { Rating } from "@mui/material";
 import { BsCartPlus, BsCheck } from "react-icons/bs";
-import useFetch from "../../hooks/useFetch.jsx";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import axios from "axios";
 
@@ -25,6 +24,19 @@ const SearchData = (props) => {
 
   const [isClicked, setIsClicked] = useState(false);
 
+  useEffect(() => {
+    // When the component mounts, retrieve the value from localStorage
+    const savedIsClicked = localStorage.getItem('isClicked');
+    if (savedIsClicked) {
+      setIsClicked(JSON.parse(savedIsClicked));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Whenever isClicked changes, update localStorage
+    localStorage.setItem('isClicked', JSON.stringify(isClicked));
+  }, [isClicked]);
+
   const handleClick = async (productId) => {
     setIsClicked(prev => !prev);
     const headers = {
@@ -32,7 +44,9 @@ const SearchData = (props) => {
       token: token,
     };
     if (!isClicked) {
-      const fetchHook = await axios.post(`${import.meta.env.VITE_BACK_URL}/api/cart/add`, {productId}, {headers})
+      const fetchHook = await axios.post(`${import.meta.env.VITE_BACK_URL}/api/cart/add`, {productId}, {headers});
+    } else {
+      const fetchHook = await axios.delete(`${import.meta.env.VITE_BACK_URL}/api/cart/${productId}`);
     }
   };
 

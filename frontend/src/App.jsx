@@ -12,6 +12,10 @@ import Search from './pages/Search/Search.jsx';
 import SingleProduct from './pages/SingleProduct/SingleProduct.jsx';
 import Liked from "./pages/Liked/Liked.jsx";
 import Cart from "./pages/Cart/Cart.jsx";
+import Activation from "./pages/Activation/Activation.jsx";
+import ActivateAccountPage from "./pages/Activation/Activation.jsx";
+import Description from "./components/Description/Description.jsx";
+import Reviews from "./components/Reviews/Reviews.jsx";
 
 function App() {
   const { token } = useContext(AuthContext);
@@ -28,10 +32,14 @@ function App() {
           <Route path={"/liked"} element={<Liked />} />
           <Route path={"/cart"} element={<Cart />} />
           <Route path={'/search'} element={<Search />} />
-          <Route path={'/products/:id'} element={<SingleProduct />} />
+          <Route path={'/products/:id'} element={<SingleProduct />} >
+            <Route path={"description"} element={<Description />} />
+            <Route path={"reviews"} element={<Reviews />} />
+          </Route>
         </Route>
         <Route path={'/register'} element={<Register />} />
         <Route path={'/login'} element={<Login />} />
+        <Route path={"/user/auth/account/activate/:code"} element={<ActivateAccountPage />} />
       </Routes>
   );
 }

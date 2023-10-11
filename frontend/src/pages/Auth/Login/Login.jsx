@@ -29,6 +29,8 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    localStorage.clear();
+
     try {
       const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/auth/login`, {
         method: "POST",

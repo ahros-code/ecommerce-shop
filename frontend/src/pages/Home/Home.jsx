@@ -7,7 +7,6 @@ import Services from "../../components/Services/Services.jsx";
 import Suppliers from "../../components/Suppliers/Suppliers.jsx";
 
 const Home = () => {
-  // tokenlarni qosh
   return (
       <>
         <Hero/>

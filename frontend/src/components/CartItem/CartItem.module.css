@@ -14,10 +14,15 @@
     background-color: #F7FAFC;
 }
 
+.image > img {
+    border-radius: 6px;
+}
+
 .productTitle {
     color: #1C1C1C;
     font-weight: 500;
     font-size: 17px;
+    margin-bottom: 6px;
 }
 
 .shopTitle {

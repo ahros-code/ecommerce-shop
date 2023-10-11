@@ -1,7 +1,14 @@
 import {Request, Response} from "express";
 import {ConfirmCodeModel, UserModel} from "../models/index";
 import jwt from "jsonwebtoken"
-import {BACKEND_URL, EMAIL_SENDER, JWT_SECRET, NODEMAILER_PASS, NODEMAILER_USER} from "../constants/constants";
+import {
+  BACKEND_URL,
+  EMAIL_SENDER,
+  FRONTEND_URL,
+  JWT_SECRET,
+  NODEMAILER_PASS,
+  NODEMAILER_USER
+} from "../constants/constants";
 import {genSaltSync, hashSync,compareSync} from "bcrypt"
 import {v4} from "uuid"
 import nodemailer from "nodemailer"
@@ -57,12 +64,12 @@ async function userRegister(req: Request, res: Response) {
     })
     const message = transport.sendMail({
       from: EMAIL_SENDER,
-      to: "aa@gmail.com",
+      to: email,
       subject: "Activate your account",
       html: `
         <div>
           <h1>activation link</h1>
-            <a href="${BACKEND_URL}/api/auth/activate/${activateLink}">Activate account</a>
+            <a href="${FRONTEND_URL}/user/auth/account/activate/${activateLink}">Activate account</a>
         </div>
       `
     })

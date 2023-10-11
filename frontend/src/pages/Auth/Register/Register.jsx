@@ -36,6 +36,8 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    localStorage.clear();
+
     const formData = new FormData();
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);

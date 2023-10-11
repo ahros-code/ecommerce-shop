@@ -53,8 +53,13 @@ async function getUserCart(req: Request, res: Response) {
 
 async function deleteItemFromCart(req: Request, res: Response) {
   try {
-    const {id} = req.params;
+    const {id} = req.params as any;
     const cartItem = await CartModel.findOne({where: {id}});
+    if(!cartItem){
+      const reserveCartItem = await CartModel.findOne({where: {ProductModelId: id}});
+      await reserveCartItem.destroy();
+      return;
+    }
     await cartItem.destroy();
     return res.status(200).send({
       success: true,
