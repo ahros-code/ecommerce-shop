@@ -4,3 +4,39 @@
     border-radius: 6px;
     border: 1px solid #DEE2E7;
 }
+
+.image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #DEE2E7;
+    margin-bottom: 15px;
+}
+
+.shopName {
+    font-size: 30px;
+}
+
+.input {
+    padding-left: 5px;
+    width: 300px;
+    height: 30px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 2px;
+    border: 1px solid #DEE2E7;
+}
+
+.subHeader {
+    display: flex;
+    justify-content: space-between;
+}
