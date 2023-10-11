@@ -11,6 +11,7 @@ import DiscountCard from "../DiscountCard/DiscountCard.jsx";
 const Hero = () => {
   const {data: categories} = useFetch(`${import.meta.env.VITE_BACK_URL}/api/category/all`);
   const {data: discounts} = useFetch(`${import.meta.env.VITE_BACK_URL}/api/discount/all`)
+
   return (
       <div className={css.wrapper}>
         <div className={css.columns}>

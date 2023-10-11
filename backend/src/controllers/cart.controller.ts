@@ -1,15 +1,15 @@
 import {Request, Response} from "express";
-import {CartModel, ImageModel, OrderModel, SellerModel, ShopModel} from "../models/index";
+import {CartModel, ImageModel, ShopModel} from "../models/index";
 import {ProductModel, UserModel} from "../models";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
 
 async function getUserCart(req: Request, res: Response) {
   try {
-    const { token } = req.headers as any;
+    const {token} = req.headers as any;
     const userCreds = jwt.verify(token, JWT_SECRET) as any;
     const user = await UserModel.findOne({
-      where: { email: userCreds.email, password: userCreds.password },
+      where: {email: userCreds.email, password: userCreds.password},
     }) as any;
     if (!(user) || !token || !userCreds) {
       return res.status(400).send({
@@ -20,7 +20,7 @@ async function getUserCart(req: Request, res: Response) {
       });
     }
     const cart = await CartModel.findAll({
-      where: { UserModelId: user.id },
+      where: {UserModelId: user.id},
       include: [
         {
           model: ProductModel,
@@ -51,8 +51,8 @@ async function getUserCart(req: Request, res: Response) {
   }
 }
 
-async function deleteItemFromCart(req:Request, res:Response) {
-  try{
+async function deleteItemFromCart(req: Request, res: Response) {
+  try {
     const {id} = req.params;
     const cartItem = await CartModel.findOne({where: {id}});
     await cartItem.destroy();
@@ -62,7 +62,7 @@ async function deleteItemFromCart(req:Request, res:Response) {
       data: [],
       message: "deleted"
     })
-  } catch (err){
+  } catch (err) {
     return res.status(500).send({
       success: false,
       status: 500,
@@ -72,12 +72,13 @@ async function deleteItemFromCart(req:Request, res:Response) {
   }
 }
 
-async function addToCart(req:Request, res:Response) {
-  try{
-    const token = req.headers;
-    const userCreds = jwt.sign(token, JWT_SECRET) as any;
+async function addToCart(req: Request, res: Response) {
+  try {
+    const {token} = req.headers as any;
+    const {productId} = req.body as any;
+    const userCreds = jwt.verify(token, JWT_SECRET) as any;
     const user = await UserModel.findOne({where: {email: userCreds.email, password: userCreds.password}}) as any;
-    if(!user || !token || !userCreds){
+    if (!user || !token || !userCreds) {
       return res.status(400).send({
         success: false,
         data: [],
@@ -85,18 +86,17 @@ async function addToCart(req:Request, res:Response) {
         message: "Token is invalid"
       })
     }
-    const {productId} = req.body;
     const product = await CartModel.create({
       UserModelId: user.id,
       ProductModelId: productId
-    },{returning: true});
+    }, {returning: true});
     return res.status(201).send({
       success: true,
-      data: [{product}],
+      data: product,
       status: 201,
       message: "Created"
     })
-  } catch (err){
+  } catch (err) {
     return res.status(500).send({
       success: false,
       status: 500,

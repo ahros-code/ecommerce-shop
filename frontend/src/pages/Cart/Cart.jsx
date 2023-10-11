@@ -1,5 +1,4 @@
 import css from "./Cart.module.css"
-import useFetch from "../../hooks/useFetch.jsx";
 import {useContext, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import CartItem from "../../components/CartItem/CartItem.jsx";
@@ -8,15 +7,16 @@ import payment1 from "../../assets/images/payment-1.png"
 import payment2 from "../../assets/images/payment-2.png"
 import payment3 from "../../assets/images/payment-3.png"
 import payment4 from "../../assets/images/payment-4.png"
+import useCartFetch from "../../hooks/useCartFetch.jsx";
 
 const Cart = () => {
   const {token} = useContext(AuthContext);
-  const {data: Cart} = useFetch(`${import.meta.env.VITE_BACK_URL}/api/cart/get`, {
+  const {data: Cart} = useCartFetch(`${import.meta.env.VITE_BACK_URL}/api/cart/get`, {
     headers: {
       token
     }
   });
-  const [totalCountedPrice, setTotalCountedPrice] = useState(Cart.totalPrice);
+  const [totalCountedPrice, setTotalCountedPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(0);
   const [tax, setTax] = useState(14);
 

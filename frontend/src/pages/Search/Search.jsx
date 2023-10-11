@@ -1,14 +1,13 @@
-import css from "./Search.module.css";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch.jsx";
-import {useEffect, useState} from "react";
-import Sidebar from "../../components/Sidebar/Sidebar.jsx";
-import SearchData from "../../components/SearchProduct/SearchData.jsx";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Sidebar from "../../components/Sidebar/Sidebar.jsx";
+import SearchData from "../../components/SearchProduct/SearchData.jsx";
+import css from "./Search.module.css";
 
 const Search = () => {
   const location = useLocation();
@@ -23,8 +22,7 @@ const Search = () => {
     if (!queryValue) {
       navigate("/"); // Redirect if queryValue is undefined
     }
-
-  }, [queryValue, navigate])
+  }, [queryValue, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,27 +36,27 @@ const Search = () => {
     fetchData();
   }, [queryValue, currentPage]);
 
-
   const handlePageChange = (event, page) => {
     navigate(`?q=${queryValue}&pageNumber=${page}`);
   };
+
   return (
       <div className={css.wrapper}>
         <div className={css.sidebar}>
-            <Sidebar categories={data?.data} brand={data?.data} />
+          <Sidebar categories={data?.data} brand={data?.data} />
         </div>
         <div className={css.products}>
-          {data?.data?.map((data, index) => (
+          {data?.data?.map((data2, index) => (
               <SearchData
                   key={index}
-                  name={data.name}
-                  image={data.ImageModel.link}
-                  price={data.price}
-                  discountPrice={data.discountPrice}
-                  description={data.description}
-                  sold={data.sold}
-                  id={data.id}
-                  rating={data.rating}
+                  name={data2.name}
+                  image={data2?.ImageModel?.link}
+                  price={data2.price}
+                  discountPrice={data2.discountPrice}
+                  description={data2.description}
+                  sold={data2.sold}
+                  id={data2.id}
+                  rating={data2.rating}
               />
           ))}
           <div className={css.pagination}>
@@ -69,8 +67,14 @@ const Search = () => {
                   onChange={handlePageChange}
                   renderItem={(item) => (
                       <PaginationItem
-                          icon={item.type === 'previous' ? <ArrowBackIcon /> : <ArrowForwardIcon />}
-                          component={item.type === 'previous' || item.type === 'next' ? 'button' : 'li'}
+                          icon={
+                            item.type === "previous" ? (
+                                <ArrowBackIcon />
+                            ) : (
+                                <ArrowForwardIcon />
+                            )
+                          }
+                          component={item.type === "previous" || item.type === "next" ? "button" : "li"}
                           {...item}
                       />
                   )}

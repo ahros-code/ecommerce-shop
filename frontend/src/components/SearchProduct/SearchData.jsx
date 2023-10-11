@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, { useContext, useState } from 'react';
 import css from './SearchData.module.css';
-import {Link} from 'react-router-dom';
-import heartIcon from "../../assets/images/like.svg"
-import heartFillIcon from "../../assets/images/heartFilled.png"
-import {Rating} from "@mui/material";
+import { Link } from 'react-router-dom';
+import heartIcon from "../../assets/images/like.svg";
+import heartFillIcon from "../../assets/images/heartFilled.png";
+import { Rating } from "@mui/material";
+import { BsCartPlus, BsCheck } from "react-icons/bs";
+import useFetch from "../../hooks/useFetch.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import axios from "axios";
 
 const SearchData = (props) => {
-  const {name, image, price, discountPrice, description, sold, id, rating} = props;
+  const { name, image, price, discountPrice, description, sold, id, rating } = props;
   const [value, setValue] = React.useState(0);
+
+  const {token} = useContext(AuthContext)
 
   // Initialize state for the like status
   const [isLiked, setIsLiked] = useState(() => {
@@ -16,6 +22,19 @@ const SearchData = (props) => {
     // Check if the current item is liked
     return likedItems.some((item) => item.id === id);
   });
+
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = async (productId) => {
+    setIsClicked(prev => !prev);
+    const headers = {
+      "Content-Type": "application/json",
+      token: token,
+    };
+    if (!isClicked) {
+      const fetchHook = await axios.post(`${import.meta.env.VITE_BACK_URL}/api/cart/add`, {productId}, {headers})
+    }
+  };
 
   // Function to handle the like button click
   const handleLike = () => {
@@ -32,19 +51,17 @@ const SearchData = (props) => {
       localStorage.setItem('likedItems', JSON.stringify(updatedLikedItems));
     } else {
       // Add the item to likedItems
-      const newItem = {id, name, image, price, discountPrice, description, sold};
+      const newItem = { id, name, image, price, discountPrice, description, sold };
       const updatedLikedItems = [...likedItems, newItem];
       localStorage.setItem('likedItems', JSON.stringify(updatedLikedItems));
     }
-
-    // ...
   };
 
   return (
       <div className={css.wrapper}>
         <div className={css.main}>
           <div className={css.image}>
-            <img src={`${import.meta.env.VITE_BACK_URL}${image}`} alt={`${name}'s image`}/>
+            <img src={`${import.meta.env.VITE_BACK_URL}${image}`} alt={`${name}'s image`} />
           </div>
           <div className={css.mainSection}>
             <h4 className={css.text}>{name}</h4>
@@ -68,7 +85,14 @@ const SearchData = (props) => {
         <div className={css.buttonSection}>
           <button className={css.likeButton} onClick={handleLike}>
             <img src={isLiked ? heartFillIcon : heartIcon} alt="Heart icon"
-                 className={isLiked ? css.likedIcon : css.unlikedIcon}/>
+                 className={isLiked ? css.likedIcon : css.unlikedIcon} />
+          </button>
+          <button className={css.addToCartBtn} onClick={() => handleClick(id)}>
+            {isClicked ? (
+                <BsCheck style={{ color: "#0D6EFD", fontSize: "22px" }} />
+            ) : (
+                <BsCartPlus style={{ color: "#0D6EFD", fontSize: "22px" }} />
+            )}
           </button>
         </div>
       </div>

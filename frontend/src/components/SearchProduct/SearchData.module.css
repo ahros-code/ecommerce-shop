@@ -80,6 +80,8 @@
 
 .buttonSection {
     margin-top: 20px;
+    display: flex;
+    gap: 10px;
 }
 
 .likeButton {
@@ -96,4 +98,15 @@
 .ratingSection {
     display: flex;
     gap: 20px;
+}
+
+.addToCartBtn {
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
 }

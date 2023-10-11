@@ -1,7 +1,8 @@
 import {useContext, useEffect, useState} from 'react';
+import {ProductContext} from "../context/ProductContext.jsx";
 
-const useFetch = (url, options) => {
-  const [data, setData] = useState([])
+const useCartFetch = (url, options) => {
+  const {data, setData} = useContext(ProductContext)
 
   async function getData() {
     try {
@@ -20,4 +21,4 @@ const useFetch = (url, options) => {
   return {data};
 }
 
-export default useFetch
+export default useCartFetch
