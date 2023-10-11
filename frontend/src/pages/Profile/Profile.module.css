@@ -1,5 +1,6 @@
 .sections {
     display: flex;
+    justify-content: space-between;
 }
 
 .sidebar > h3 {
@@ -10,12 +11,8 @@
     margin-bottom: 20px;
 }
 
-.sibebarList {
-    margin-right: 270px;
-}
-
 .sideBarItem {
-    width: 100px;
+    width: 200px;
     font-size: 17px;
     margin-bottom: 10px;
 }

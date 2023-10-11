@@ -10,7 +10,6 @@ import axios from "axios";
 
 const SearchData = (props) => {
   const { name, image, price, discountPrice, description, sold, id, rating } = props;
-  const [value, setValue] = React.useState(0);
 
   const {token} = useContext(AuthContext)
 
@@ -23,19 +22,6 @@ const SearchData = (props) => {
   });
 
   const [isClicked, setIsClicked] = useState(false);
-
-  useEffect(() => {
-    // When the component mounts, retrieve the value from localStorage
-    const savedIsClicked = localStorage.getItem('isClicked');
-    if (savedIsClicked) {
-      setIsClicked(JSON.parse(savedIsClicked));
-    }
-  }, []);
-
-  useEffect(() => {
-    // Whenever isClicked changes, update localStorage
-    localStorage.setItem('isClicked', JSON.stringify(isClicked));
-  }, [isClicked]);
 
   const handleClick = async (productId) => {
     setIsClicked(prev => !prev);

@@ -1,4 +1,4 @@
-import {CartModel, ImageModel, OrderModel, ProductModel, UserModel} from "../models";
+import {CartModel, ImageModel, OrderModel, ProductModel, SellerModel, UserModel} from "../models";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
 import {Request, Response} from "express";
@@ -8,7 +8,10 @@ async function getUserOrders(req, res) {
   try {
     const token = req.headers.token;
     const userCreds = jwt.verify(token, JWT_SECRET) as any;
-    const user = await UserModel.findOne({ where: { email: userCreds.email, password: userCreds.password } }) as any;
+    let user = await UserModel.findOne({ where: { email: userCreds.email, password: userCreds.password } }) as any;
+    if (!user) {
+      user = await SellerModel.findOne({ where: { email: userCreds.email, password: userCreds.password } }) as any;
+    }
     if (!user || !token || !userCreds) {
       return res.status(400).send({
         success: false,
@@ -79,18 +82,24 @@ async function addOrder(req: Request, res: Response) {
     const cartItems = await CartModel.findAll({
       where: { UserModelId: user.id },
     }) as any;
+
+    // Generate a single order number for all products
+    const orderNumber = generateRandomNumber(7);
+
     for (const cartItem of cartItems) {
       cartItem.sold + 1;
       cartItem.pcs - 1;
       await cartItem.save();
-      const orderNumber = generateRandomNumber(7);
+
       await OrderModel.create({
         UserModelId: cartItem.UserModelId,
         ProductModelId: cartItem.ProductModelId,
         orderNumber: orderNumber,
       });
     }
+
     await CartModel.destroy({ where: { UserModelId: user.id } });
+
     return res.status(201).send({
       success: true,
       status: 201,

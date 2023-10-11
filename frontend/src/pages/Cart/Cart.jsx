@@ -8,6 +8,8 @@ import payment2 from "../../assets/images/payment-2.png"
 import payment3 from "../../assets/images/payment-3.png"
 import payment4 from "../../assets/images/payment-4.png"
 import useCartFetch from "../../hooks/useCartFetch.jsx";
+import axios from "axios";
+import {ProductContext} from "../../context/ProductContext.jsx";
 
 const Cart = () => {
   const {token} = useContext(AuthContext);
@@ -16,9 +18,30 @@ const Cart = () => {
       token
     }
   });
-  const [totalCountedPrice, setTotalCountedPrice] = useState(0);
+  const {setData} = useContext(ProductContext)
   const [discountPrice, setDiscountPrice] = useState(0);
-  const [tax, setTax] = useState(14);
+  const [tax, setTax] = useState(() => {
+    return 15;
+  });
+
+  const handleCheckout = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+      token: token,
+    };
+    setData([])
+    const makeOrderFetch = await axios.post(`${import.meta.env.VITE_BACK_URL}/api/order/add`, {}, {headers})
+  }
+
+  const [totalCountedPrice, setTotalCountedPrice] = useState(() => {
+
+    const totalPrice = Cart.totalPrice;
+
+    const calculatedPrice = totalPrice + (tax / 100) * totalPrice;
+    return calculatedPrice;
+
+    return 0
+  });
 
   return (
       <div className={css.wrapper}>
@@ -55,7 +78,7 @@ const Cart = () => {
                   Tax:
                 </div>
                 <div className={css.taxValue}>
-                  + ${tax}
+                  + {tax}%
                 </div>
               </div>
             </div>
@@ -68,7 +91,7 @@ const Cart = () => {
                   ${totalCountedPrice}
                 </div>
               </div>
-              <button className={css.checkoutBtn}>Checkout</button>
+              <button className={css.checkoutBtn} onClick={handleCheckout}>Checkout</button>
               <div className={css.images}>
                 <ul className={css.parent}>
                   <li>

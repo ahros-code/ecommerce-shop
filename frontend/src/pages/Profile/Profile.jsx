@@ -1,18 +1,21 @@
 import css from "./Profile.module.css";
 import useFetch from "../../hooks/useFetch.jsx";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext.jsx";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import {Link, Outlet, useLocation} from "react-router-dom";
+import {SellerContext} from "../../context/SellerContext.jsx";
 
 const Profile = () => {
-  const { token } = useContext(AuthContext);
-  const { data: profileData } = useFetch(`${import.meta.env.VITE_BACK_URL}/api/profile`, {
+  const {token} = useContext(AuthContext);
+  const {data: profileData} = useFetch(`${import.meta.env.VITE_BACK_URL}/api/profile`, {
     headers: {
       token: token,
     },
   });
 
   const location = useLocation();
+
+  const {isSeller} = useContext(SellerContext)
 
   return (
       <div className={css.wrapper}>
@@ -23,18 +26,26 @@ const Profile = () => {
           <div className={css.sections}>
             <ul className={css.sibebarList}>
               <li className={css.sideBarItem}>
-                <Link to="/profile/orders" className={location.pathname === "/profile/orders" ? css.activeLink : css.notActiveLink}>
+                <Link to="/profile/orders"
+                      className={location.pathname === "/profile/orders" ? css.activeLink : css.notActiveLink}>
                   My orders
                 </Link>
               </li>
               <li className={css.sideBarItem}>
-                <Link to="/profile/user" className={location.pathname === "/profile/user" ? css.activeLink : css.notActiveLink}>
+                <Link to="/profile/user"
+                      className={location.pathname === "/profile/user" ? css.activeLink : css.notActiveLink}>
                   Settings
+                </Link>
+              </li>
+              <li className={css.sideBarItem}>
+                <Link to="/profile/shop"
+                      className={location.pathname === "/profile/shop" ? css.activeLink : css.notActiveLink}>
+                  {isSeller ? 'My shop' : 'Create new shop'}
                 </Link>
               </li>
             </ul>
             <div className={css.sidebarRightSection}>
-              <Outlet />
+              <Outlet/>
             </div>
           </div>
         </div>

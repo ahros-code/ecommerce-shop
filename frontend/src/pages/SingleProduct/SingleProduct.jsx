@@ -75,7 +75,7 @@ const SingleProduct = () => {
           <div className={css.shopInfoSection}>
             <div className={css.nameAndImage}>
               <div className={css.shopImage}>
-                <img src={`${import.meta.env.VITE_BACK_URL}${data?.data?.ImageModel.link}`} alt={"shop's image"}
+                <img src={`${import.meta.env.VITE_BACK_URL}${data?.data?.ShopModel.ImageModel.link}`} alt={"shop's image"}
                      className={css.image}/>
               </div>
               <div className={css.shopName}>{data?.data?.ShopModel.name}</div>
@@ -135,7 +135,7 @@ const SingleProduct = () => {
             <h4 className={css.secondTitle}>You may like</h4>
             <div className={css.products}>
               {recommended?.data?.map((product, index) => (
-                  <Link to={`/products/${product.id}`}>
+                  <Link to={`/products/${product.id}`} key={index}>
                     <div className={css.sec}>
                       <div className={css.secImage}>
                         <img src={`${import.meta.env.VITE_BACK_URL}${product.ImageModel.link}`}

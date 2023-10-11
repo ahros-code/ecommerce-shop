@@ -118,6 +118,7 @@
     width: 48px;
     height: 48px;
     border-radius: 4px;
+    object-fit: cover;
 }
 
 .nameAndImage {
@@ -265,4 +266,15 @@
 .secPrice {
     font-size: 16px;
     color: #8B96A5;
+}
+
+.likeButton {
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #DEE2E7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
 }

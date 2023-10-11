@@ -1,7 +1,6 @@
 // @ts-ignore
 import express from "express"
 import authRouter from "./routers/auth.router";
-import sellerAuthRouter from "./routers/sellerAuth.router";
 import categoryRouter from "./routers/category.router";
 import productRouter from "./routers/product.router";
 import shopRouter from "./routers/shop.router";
@@ -22,7 +21,6 @@ async function bootstrap(){
       console.log("🚀 Server is running...")
     })
     app.use("/api/auth", authRouter);
-    app.use("/api/seller/auth", sellerAuthRouter);
     app.use("/api/category", categoryRouter);
     app.use("/api/products", productRouter);
     app.use("/api/shop", shopRouter);

@@ -5,8 +5,8 @@ import {UserModel} from "../models/index";
 async function getProfile(req, res) {
   try{
     const {token} = req.headers as any;
-    const {email, password} = jwt.verify(token, JWT_SECRET) as any;
-    const user = await UserModel.findOne({where: {email, password}})
+    let {email, password} = jwt.verify(token, JWT_SECRET) as any;
+    let user = await UserModel.findOne({where: {email, password}})
     if(!user){
       return res.status(404).send({
         success: false,

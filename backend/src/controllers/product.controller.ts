@@ -129,32 +129,41 @@ async function getAllProducts(req, res) {
 
 async function getOneProduct(req, res) {
   try {
-    const {productId} = req.params;
+    const { productId } = req.params;
     const product = await ProductModel.findOne({
-      where: {id: productId},
-      include: [{model: BrandModel}, {model: CategoryModel}, {model: ShopModel}, {model: ImageModel}, {model: ReviewModel}]
-    })
+      where: { id: productId },
+      include: [
+        { model: BrandModel },
+        { model: CategoryModel },
+        {
+          model: ShopModel,
+          include: [{ model: ImageModel }],
+        },
+        { model: ImageModel },
+        { model: ReviewModel },
+      ],
+    });
     if (!product) {
       return res.status(404).send({
         success: false,
         status: 404,
         data: [],
-        message: "Product is not found"
-      })
+        message: "Product is not found",
+      });
     }
     return res.send({
       success: true,
       status: 200,
       data: product,
-      message: ""
-    })
+      message: "",
+    });
   } catch (err) {
     return res.status(500).send({
       success: false,
       status: 500,
       data: [],
-      message: err.message
-    })
+      message: err.message,
+    });
   }
 }
 
