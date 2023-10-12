@@ -1,10 +1,12 @@
 import css from "./Shop.module.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import ShopProductCard from "../../components/ShopProductCard/ShopProductCard.jsx";
+import CustomModal from "../../components/Modal/Modal.jsx";
+import {SellerContext} from "../../context/SellerContext.jsx";
 
 const Shop = () => {
   const { token } = useContext(AuthContext);
@@ -80,19 +82,39 @@ const Shop = () => {
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   return (
       <div className={css.wrapper}>
-        <div className={css.header}>
-          <div className={css.imageWrapper}>
-            <img
-                src={`${import.meta.env.VITE_BACK_URL}${shopData?.data?.ImageModel.link}`}
-                alt={`shop's image`}
-                className={css.image}
-            />
+        <div className={css.headerWrapper}>
+          <div className={css.header}>
+            <div className={css.imageWrapper}>
+              <img
+                  src={`${import.meta.env.VITE_BACK_URL}${shopData?.data?.ImageModel.link}`}
+                  alt={`shop's image`}
+                  className={css.image}
+              />
+            </div>
+            <div className={css.shopNameWrapper}>
+              <h4 className={css.shopName}>{shopData?.data?.name}</h4>
+            </div>
           </div>
-          <div className={css.shopNameWrapper}>
-            <h4 className={css.shopName}>{shopData?.data?.name}</h4>
+          <div className={css.addProduct}>
+            {!isModalOpen && (
+                <Button variant="contained" onClick={openModal}>
+                  Add Product
+                </Button>
+            )}
+            {isModalOpen && <CustomModal onClose={closeModal} shopId={shopData?.data?.id} />}
           </div>
         </div>
         <div className={css.subHeader}>

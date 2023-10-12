@@ -12,16 +12,8 @@ import {DiscountModel} from "./Discount.model";
 import {OrderModel} from "./Order.model";
 
 !async function () {
-  CategoryModel.hasMany(ProductModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
-  ProductModel.belongsTo(CategoryModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
+  CategoryModel.hasMany(ProductModel);
+  ProductModel.belongsTo(CategoryModel)
 
   CategoryModel.belongsTo(ImageModel, {
     foreignKey: {
@@ -35,11 +27,7 @@ import {OrderModel} from "./Order.model";
     }
   })
 
-  ProductModel.belongsTo(BrandModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
+  ProductModel.belongsTo(BrandModel);
   BrandModel.hasOne(ProductModel, {
     foreignKey: {
       allowNull: false

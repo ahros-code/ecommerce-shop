@@ -16,10 +16,13 @@ import ActivateAccountPage from "./pages/Activation/Activation.jsx";
 import Description from "./components/Description/Description.jsx";
 import Reviews from "./components/Reviews/Reviews.jsx";
 import Shop from "./pages/Shop/Shop.jsx";
+import {SellerContext} from "./context/SellerContext.jsx";
+import ShopCreation from "./pages/Shop/ShopCreation/ShopCreation.jsx";
 
 function App() {
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
+  const {isSeller} = useContext(SellerContext)
 
   return (
       <Routes>
@@ -28,7 +31,7 @@ function App() {
           <Route path={'/profile'} element={<Profile />}>
             <Route path={'orders'} element={<Orders />} />
             <Route path={'user'} element={<User />} />
-            <Route path={"shop"} element={<Shop />} />
+            <Route path={"shop"} element={isSeller == "true" ? <Shop /> : <ShopCreation />} />
           </Route>
           <Route path={"/liked"} element={<Liked />} />
           <Route path={"/cart"} element={<Cart />} />

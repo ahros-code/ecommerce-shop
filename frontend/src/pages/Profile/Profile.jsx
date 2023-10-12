@@ -40,7 +40,7 @@ const Profile = () => {
               <li className={css.sideBarItem}>
                 <Link to="/profile/shop"
                       className={location.pathname === "/profile/shop" ? css.activeLink : css.notActiveLink}>
-                  {isSeller ? 'My shop' : 'Create new shop'}
+                  {isSeller == "true" ? 'My shop' : 'Create new shop'}
                 </Link>
               </li>
             </ul>

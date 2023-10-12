@@ -1,5 +1,5 @@
-import {Request, Response} from "express";
-import {ImageModel, ProductModel, ShopModel, UserModel} from "../models";
+import {raw, Request, Response} from "express";
+import {BrandModel, ImageModel, ProductModel, ShopModel, UserModel} from "../models";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
 
@@ -64,7 +64,7 @@ async function addNewShop (req:Request, res:Response){
 async function addNewShopProduct (req, res) {
   try{
     const {token} = req.headers;
-    const {name, category_id, brand_id} = req.body;
+    const { name, price, discountPrice, warranty, model, design, pcs, description, shopId} = req.body;
     const img = req.file;
     if(!token){
       return res.status(401).send({
@@ -74,19 +74,22 @@ async function addNewShopProduct (req, res) {
         message: "Token is not provided"
       })
     }
-    const sellerCreds = jwt.verify(token, JWT_SECRET) as any;
-    const seller = await UserModel.findOne({where: {email: sellerCreds.email, password: sellerCreds.password}}) as any;
-    if(!seller){
+    const userCreds = jwt.verify(token, JWT_SECRET) as any;
+    const user = await UserModel.findOne({where: {email: userCreds.email, password: userCreds.password}}) as any;
+    if(!user){
       return res.status(404).send({
         success: true,
         status: 404,
         data: [],
-        message: "Seller is not found"
+        message: "User is not found"
       })
     }
-    const shop = await ShopModel.findOne({where: {SellerModelId: seller.id}}) as any;
+    // const ifBrand = await BrandModel.findOne({where: {name: brand}}) as any;
+    const shop = await ShopModel.findOne({where: {UserModelId: user.id}}) as any;
     const newProduct = await ProductModel.create({
-      name, ShopModelId: shop.id, CategoryModelId: category_id, BrandModelId: brand_id, ImageModel: {link: `/img/${img.filename}`}
+      name, price, discountPrice, warranty, model, design, pcs, description, ImageModel: {
+        link: `/img/${img.filename}`
+      }, ShopModelId: shopId, CategoryModelId: 2, BrandModelId:1
     },{returning: true, include: ImageModel}) as any;
     return res.status(201).send({
       success: true,
