@@ -100,13 +100,20 @@ import {OrderModel} from "./Order.model";
   OrderModel.belongsTo(ProductModel, {
     foreignKey: {
       allowNull: false
-    }
+    },
+    onDelete: 'CASCADE'
   });
-  ProductModel.hasMany(OrderModel, {
-    foreignKey: {
-      allowNull: false
-    }
-  });
+
+  ProductModel.hasMany(
+      OrderModel,
+      {
+        foreignKey: {
+          allowNull: false
+        },
+        onDelete: 'CASCADE'
+      }
+  );
+
 
   UserModel.hasOne(OrderModel, {
     foreignKey: {

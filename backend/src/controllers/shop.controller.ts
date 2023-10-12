@@ -142,4 +142,37 @@ async function getShop(req:Request, res:Response) {
   }
 }
 
+async function deleteShop(req:Request, res:Response) {
+  try {
+    const {token} = req.headers as any;
+    const userCreds = jwt.verify(token, JWT_SECRET) as any;
+    const user = await UserModel.findOne({where: {email: userCreds.email, password: userCreds.password}}) as any;
+    if(!user){
+      return res.status(404).send({
+        success: false,
+        data: [],
+        status: 404,
+        message: "User is not found"
+      })
+    }
+    const shop = await ShopModel.findOne({where: {UserModelId: user.id}, include: [{model: UserModel},{model: ImageModel}]})
+    await shop.destroy()
+    if(!shop){
+      return res.status(404).send({
+        success: false,
+        data: [],
+        status: 404,
+        message: "Shop is not found"
+      })
+    }
+  } catch (err){
+    return res.status(500).send({
+      success: false,
+      status: 500,
+      data: [],
+      message: err.message
+    })
+  }
+}
+
 export default {addNewShop, addNewShopProduct, getShop}

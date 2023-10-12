@@ -1,17 +1,13 @@
-import {CartModel, ImageModel, OrderModel, ProductModel, SellerModel, UserModel} from "../models";
+import {CartModel, ImageModel, OrderModel, ProductModel, UserModel} from "../models";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../constants/constants";
 import {Request, Response} from "express";
-import {STRING} from "sequelize";
 
 async function getUserOrders(req, res) {
   try {
     const token = req.headers.token;
     const userCreds = jwt.verify(token, JWT_SECRET) as any;
     let user = await UserModel.findOne({ where: { email: userCreds.email, password: userCreds.password } }) as any;
-    if (!user) {
-      user = await SellerModel.findOne({ where: { email: userCreds.email, password: userCreds.password } }) as any;
-    }
     if (!user || !token || !userCreds) {
       return res.status(400).send({
         success: false,

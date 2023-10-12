@@ -1,7 +1,9 @@
-import {BrandModel, CategoryModel, ImageModel, ProductModel, ReviewModel, ShopModel} from "../models/index";
+import {BrandModel, CategoryModel, ImageModel, ProductModel, ReviewModel, ShopModel, UserModel} from "../models/index";
 import {Request, Response} from "express";
 import {Op} from "sequelize";
 import {newSequelize} from "../config/db/db_connect";
+import jwt from "jsonwebtoken";
+import {JWT_SECRET} from "../constants/constants";
 
 async function findProducts(req: Request, res: Response) {
   try {
@@ -83,7 +85,7 @@ async function getAllShopProducts(req: Request, res: Response) {
       where: {ShopModelId: shopId},
       offset,
       limit,
-      include: [{model: ShopModel}, {model: CategoryModel}, {model: BrandModel}]
+      include: [{model: ShopModel}, {model: CategoryModel}, {model: BrandModel},{model: ImageModel}]
     })
     res.send(products)
   } catch (err) {
@@ -194,5 +196,46 @@ async function getRecommendedProducts(req, res) {
   }
 }
 
+async function deleteShopProduct(req:Request, res:Response) {
+  try{
+    const {token} = req.headers as any;
+    const {productId} = req.params;
+    const userCreds = jwt.verify(token, JWT_SECRET) as any;
+    const user = await UserModel.findOne({where: {email: userCreds.email, password: userCreds.password}}) as any;
+    if(!user){
+      return res.status(404).send({
+        success: false,
+        data: [],
+        status: 404,
+        message: "User is not found"
+      })
+    }
+    const shop = await ShopModel.findOne({where: {UserModelId: user.id}, include: [{model: UserModel},{model: ImageModel}]})
+    if(!shop){
+      return res.status(404).send({
+        success: false,
+        data: [],
+        status: 404,
+        message: "Shop is not found"
+      })
+    }
+    const product = await ProductModel.findOne({where: {id: productId}}) as any;
+    await product.destroy();
+    return res.status(200).send({
+      success: true,
+      data: [],
+      status: 200,
+      message: "Product was deleted successfully!"
+    })
+  } catch (err){
+    return res.status(500).send({
+      success: false,
+      status: 500,
+      data: [],
+      message: err.message,
+    });
+  }
+}
 
-export default {findProducts, getAllShopProducts, getAllProducts, getOneProduct, getRecommendedProducts}
+
+export default {findProducts, getAllShopProducts, getAllProducts, getOneProduct, getRecommendedProducts, deleteShopProduct}
