@@ -77,24 +77,39 @@ async function findProducts(req: Request, res: Response) {
 
 async function getAllShopProducts(req: Request, res: Response) {
   try {
-    const {pageNumber, pageSize} = req.query as any;
-    const offset = pageNumber ? (pageNumber - 1) * (pageSize ? pageSize : 10) : 1
+    const { pageNumber, pageSize, search } = req.query as any;
+    const offset = pageNumber ? (pageNumber - 1) * (pageSize ? pageSize : 10) : 0;
     const limit = pageSize ? pageSize : 10;
-    const {shopId} = req.params;
+    const { shopId } = req.params;
+    const whereClause = { ShopModelId: shopId };
+
+    // Add search condition if search parameter is provided
+    if (search) {
+      whereClause[Op.or] = [
+        { name: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
     const products = await ProductModel.findAll({
-      where: {ShopModelId: shopId},
+      where: whereClause,
       offset,
       limit,
-      include: [{model: ShopModel}, {model: CategoryModel}, {model: BrandModel},{model: ImageModel}]
-    })
-    res.send(products)
+      include: [
+        { model: ShopModel },
+        { model: CategoryModel },
+        { model: BrandModel },
+        { model: ImageModel },
+      ],
+    });
+
+    res.send(products);
   } catch (err) {
     return res.status(500).send({
       success: false,
       status: 500,
       data: [],
-      message: err.message
-    })
+      message: err.message,
+    });
   }
 }
 

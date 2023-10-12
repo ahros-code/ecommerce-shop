@@ -1,16 +1,17 @@
 import css from "./Shop.module.css";
-import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../context/AuthContext.jsx";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import ShopProductCard from "../../components/ShopProductCard/ShopProductCard.jsx";
 
 const Shop = () => {
-  const {token} = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const [age, setAge] = useState("");
   const [shopData, setShopData] = useState(null);
   const [shopProducts, setShopProducts] = useState(null);
+  const [search, setSearch] = useState("");
 
   const config = {
     headers: {
@@ -19,7 +20,6 @@ const Shop = () => {
   };
 
   useEffect(() => {
-
     // Send the GET request
     axios
         .get(`${import.meta.env.VITE_BACK_URL}/api/shop/get`, config)
@@ -35,27 +35,25 @@ const Shop = () => {
   useEffect(() => {
     if (shopData) {
       const id = shopData?.data?.id;
-      axios
-          .get(`${import.meta.env.VITE_BACK_URL}/api/products/shop/${id}`, config)
-          .then((response) => {
-            setShopProducts(response.data)
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      fetchShopProducts(id);
     }
   }, [shopData]);
 
+  const fetchShopProducts = async (id) => {
+    try {
+      const response = await axios.get(
+          `${import.meta.env.VITE_BACK_URL}/api/products/shop/${id}`,
+          config
+      );
+      setShopProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleRefetch = async (deletedProductId) => {
     try {
-      // Make an HTTP request or perform any data fetching operation
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/api/products/shop/${shopData?.data?.id}`);
-
-      // Update the products state with the updated data
-      setShopProducts(response.data)
-
-      // Optionally perform any additional logic based on the deletedProductId
-      // For example, show a success message or update the UI in a specific way
+      await fetchShopProducts(shopData?.data?.id);
     } catch (error) {
       console.error("Error refetching products:", error);
     }
@@ -64,6 +62,24 @@ const Shop = () => {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(
+          `${import.meta.env.VITE_BACK_URL}/api/products/shop/${shopData?.data?.id}?search=${search}`,
+          config
+      );
+      setShopProducts(response.data);
+    } catch (error) {
+      console.error("Error searching products:", error);
+    }
+  };
+
 
   return (
       <div className={css.wrapper}>
@@ -80,12 +96,17 @@ const Shop = () => {
           </div>
         </div>
         <div className={css.subHeader}>
-          <TextField
-              id="outlined-basic"
-              label="Outlined"
-              variant="outlined"
-              style={{width: "300px", height: "20px"}}
-          />
+          <form onSubmit={handleSearchSubmit}>
+            <TextField
+                id="outlined-basic"
+                label="Search"
+                variant="outlined"
+                style={{ width: "300px", height: "20px" }}
+                value={search}
+                onChange={handleSearchChange}
+            />
+            <button type="submit" style={{ display: "none" }} onClick={handleSearchSubmit}></button>
+          </form>
           <FormControl>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
@@ -94,7 +115,7 @@ const Shop = () => {
                 value={age}
                 label="Age"
                 onChange={handleChange}
-                style={{width: "120px"}}
+                style={{ width: "120px" }}
             >
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
@@ -104,7 +125,14 @@ const Shop = () => {
         </div>
         <div className={css.main}>
           {shopProducts?.map((product, index) => (
-              <ShopProductCard key={index} productName={product.name} productImage={product.ImageModel.link}  price={product.price} id={product.id} refetch={handleRefetch} />
+              <ShopProductCard
+                  key={index}
+                  productName={product.name}
+                  productImage={product.ImageModel.link}
+                  price={product.price}
+                  id={product.id}
+                  refetch={handleRefetch}
+              />
           ))}
         </div>
       </div>
