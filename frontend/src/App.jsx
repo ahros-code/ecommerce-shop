@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { AuthContext } from './context/AuthContext.jsx';
 import Layout from './layouts/Main/Layout/Layout.jsx';
 import Login from './pages/Auth/Login/Login.jsx';
 import Register from './pages/Auth/Register/Register.jsx';
@@ -20,8 +19,6 @@ import {SellerContext} from "./context/SellerContext.jsx";
 import ShopCreation from "./pages/Shop/ShopCreation/ShopCreation.jsx";
 
 function App() {
-  const { token } = useContext(AuthContext);
-  const navigate = useNavigate();
   const {isSeller} = useContext(SellerContext)
 
   return (

@@ -3,7 +3,7 @@ import ProductCard from "../ProductCard/ProductCard.jsx";
 import {Link} from "react-router-dom";
 
 const Sections = props => {
-  const {categoryName, categoryImage, products} = props;
+  const {categoryName, categoryImage, products, id} = props;
   return (
       <div className={css.wrapper}>
         <div className={css.categorySections}>
@@ -13,7 +13,7 @@ const Sections = props => {
             borderBottomLeftRadius: 6
           }}>
             <h3 className={css.mainSectionText}>{categoryName}</h3>
-            <Link to={`/products?category=${categoryName}`}>
+            <Link to={`/category/${id}`}>
               <p className={css.categoryBtn}>Source now</p>
             </Link>
           </div>

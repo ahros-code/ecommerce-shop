@@ -12,6 +12,7 @@ import axios from "axios";
 import {ProductContext} from "../../context/ProductContext.jsx";
 
 const Cart = () => {
+  const [totalCountedPrice, setTotalCountedPrice] = useState();
   const {token} = useContext(AuthContext);
   const {data: Cart} = useCartFetch(`${import.meta.env.VITE_BACK_URL}/api/cart/get`, {
     headers: {
@@ -32,17 +33,6 @@ const Cart = () => {
     setData([])
     const makeOrderFetch = await axios.post(`${import.meta.env.VITE_BACK_URL}/api/order/add`, {}, {headers})
   }
-
-  const [totalCountedPrice, setTotalCountedPrice] = useState(() => {
-
-    const totalPrice = Cart.totalPrice;
-
-    const calculatedPrice = totalPrice + (tax / 100) * totalPrice;
-    return calculatedPrice;
-
-    return 0
-  });
-
   return (
       <div className={css.wrapper}>
         <h4 className={css.myCartTitle}>My cart</h4>

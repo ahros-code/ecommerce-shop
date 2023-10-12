@@ -10,9 +10,9 @@ const Offers = () => {
         <div className={css.sections}>
           <div className={css.leftSection}>
             <h3 className={css.leftSectionText}>Deals and offers</h3>
-            <Link to={"/category/all"} className={css.link}>
-              <div className={css.btn}>View more</div>
-            </Link>
+            {/*<Link to={"/offers"} className={css.link}>*/}
+            {/*  <div className={css.btn}>View more</div>*/}
+            {/*</Link>*/}
           </div>
           <div className={css.rightSection}>
             {offers?.data?.map((offer, index) => (

@@ -7,7 +7,7 @@ const CategoryProduct = () => {
   return (
       <div className={css.wrapper}>
         {categoryAndProducts?.data?.map((category, index) => {
-          return <Sections key={index} categoryName={category.name} categoryImage={category.ImageModel.link} products={category.ProductModels}/>
+          return <Sections key={index} categoryName={category.name} categoryImage={category.ImageModel.link} products={category.ProductModels} id={category.id}/>
         })}
       </div>
   )

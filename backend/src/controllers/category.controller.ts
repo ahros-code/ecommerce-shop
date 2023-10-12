@@ -76,11 +76,11 @@ async function getProductsByCategory(req:Request, res:Response){
     // const {pageNumber, pageSize} = req.query as any;
     // const offset = pageNumber ? (pageNumber - 1) * (pageSize ? pageSize : 10) : 1
     // const limit = pageSize ? pageSize : 10;
-    const categories = await CategoryModel.findAll({where: {id: categoryId}, include: ProductModel});
+    const categories = await CategoryModel.findAll({where: {id: categoryId}, include: [{model: ProductModel}, {model: ImageModel}]});
     return res.status(200).send({
       success: true,
       status: 200,
-      data: [{categories}],
+      data: categories,
       message: ""
     })
   } catch (err){

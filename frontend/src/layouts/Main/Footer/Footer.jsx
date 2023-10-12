@@ -5,6 +5,7 @@ import instagram from "../../../assets/images/instagram.svg";
 import linkedin from "../../../assets/images/linkedin.svg";
 import youtube from "../../../assets/images/youtube.svg";
 import x from "../../../assets/images/x.svg";
+import {Link} from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -62,10 +63,10 @@ const Footer = () => {
         <div className={css.forusers}>
           <h4 className={css.title}>For users</h4>
           <ul className={css.footerList}>
-            <li className={css.footerItem}>Login</li>
-            <li className={css.footerItem}>Register</li>
-            <li className={css.footerItem}>Settings</li>
-            <li className={css.footerItem}>My Orders</li>
+            <li className={css.footerItem}><Link to={"/login"}>Login</Link></li>
+            <li className={css.footerItem}><Link to={"/register"}>Register</Link></li>
+            <li className={css.footerItem}><Link to={"/profile/settings"}>Settings</Link></li>
+            <li className={css.footerItem}><Link to={"/profile/orders"}>My Orders</Link></li>
           </ul>
         </div>
       </footer>

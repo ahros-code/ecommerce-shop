@@ -85,3 +85,7 @@
     display: flex;
     justify-content: center;
 }
+
+.wrapper {
+    padding-bottom: 70px;
+}
